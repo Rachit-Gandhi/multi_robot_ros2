@@ -40,4 +40,77 @@ ros2 launch tb3_sim turtlebot3_world.launch.py
 
 This starts our demonstration where 2 TurtleBots are present in the world
 
-
+# Docker
+```
+docker pull osrf/ros:humble-desktop
+```
+```
+docker run -it osrf/ros:humble-desktop
+```
+```
+apt-get update
+```
+```
+apt-get install vim -y
+```
+```
+apt-get install nano -y
+```
+```
+mkdir -p ~/turtlebot3_ws/src
+```
+```
+cd ~/turtlebot3_ws
+```
+```
+gedit turtlebot3.repos
+```
+```
+                          
+    type: git
+    url: https://github.com/ROBOTIS-GIT/turtlebot3.git
+    version: humble-devel
+  turtlebot3/turtlebot3_msgs:
+    type: git
+    url: https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+    version: humble-devel
+  turtlebot3/turtlebot3_simulations:
+    type: git
+    url: https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+    version: humble-devel
+  utils/DynamixelSDK:
+    type: git
+    url: https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+    version: humble-devel
+  utils/hls_lfcd_lds_driver:
+    type: git
+    url: https://github.com/ROBOTIS-GIT/hls_lfcd_lds_driver.git
+    version: humble-devel
+```
+```
+vcs import src < turtlebot3.repos
+```
+```
+sudo apt install ros-humble-gazebo-ros-pkgs
+```
+```
+source /opt/ros/galactic/setup.bash
+```
+```
+colcon build --symlink-install
+```
+```
+source ./install/setup.bash
+```
+```
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models
+```
+```
+export TURTLEBOT3_MODEL=waffle_pi
+```
+```
+cd ~/turtlebot3_ws
+```
+```
+ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py
+```
